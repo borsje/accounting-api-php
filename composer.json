@@ -1,0 +1,8 @@
+{
+  "name": "borsje/accounting-api-php",
+  "autoload": {
+    "psr-0": {
+      "autoload.php": "src"
+    }
+  }
+}
