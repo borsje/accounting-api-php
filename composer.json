@@ -1,8 +1,12 @@
 {
-  "name": "borsje/accounting-api-php",
-  "autoload": {
-    "psr-0": {
-      "autoload.php": "src"
-    }
-  }
+	"name": "borsje/accounting-api-php",
+	"version": "0.1",
+	"autoload": {
+		"psr-0": {
+			"Accounting.php": "src"
+		}
+	},
+	"require": {
+		"php": ">= 5.4.0"
+	}
 }
