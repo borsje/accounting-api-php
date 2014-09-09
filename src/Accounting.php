@@ -9,11 +9,11 @@ class Accounting {
 	}
 	
 	public function addInvoice($request) {
-		return $this->call("/invoices.json", "POST", $request);
+		return $this->_call("/invoices.json", "POST", $request);
 	}
 	
 	private function _call($url, $method, $data) {
-		$curl = curl_init("https://149.210.146.17/api".$url);
+		$curl = curl_init("http://149.210.146.17/api".$url);
 		
 		if ($method == "POST") {
 			curl_setopt($curl, CURLOPT_POST, true);
@@ -28,11 +28,21 @@ class Accounting {
 				"Content-length: ".strlen($json)
 			],
 			CURLOPT_POSTFIELDS => $json,
-			CURLOPT_USRPWD => $this->username.":".$this->password,
-			CURLOPT_RETURNTRANSER = true
+			CURLOPT_USERPWD => $this->username.":".$this->password,
+			CURLOPT_RETURNTRANSFER => true
 		]);
+		$response = curl_exec($curl);
 		
-		return json_decode(curl_exec($curl));
+		if ($response !== false) {
+			return json_decode($response);
+		} else {
+			return [
+				"result" => "error",
+				"errors" => [
+					"general" => "Unknown."
+				]
+			];
+		}
 	}
 }
 ?>
